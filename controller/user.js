@@ -9,7 +9,7 @@ export const getMyprofile = (req, res) => {
     });
 }
 
-export const loginUser = async (req, res) => {
+export const loginUser = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
@@ -28,7 +28,7 @@ export const loginUser = async (req, res) => {
     }
 }
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
     try {
         const { name, email, password } = req.body;
 
@@ -49,9 +49,9 @@ export const register = async (req, res) => {
 export const logoutUser = (req, res) => {
 
     res.status(404).cookie("token", "", {
-        expires: new Date(Date.now()) ,
+        expires: new Date(Date.now()),
         sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
-        secure: process.env.NODE_ENV === "Development"? false : true
+        secure: process.env.NODE_ENV === "Development" ? false : true
     }).json({
         sucess: "true"
     })
